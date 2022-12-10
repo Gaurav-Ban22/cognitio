@@ -77,6 +77,14 @@ func main() {
 
 	})
 
+	//router.POST("/api/sets/:name", func(ctx *gin.Context) {
+		//name := ctx.Param("name");
+
+	//});
+
+
+	
+
 
 
 
