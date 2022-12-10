@@ -8,13 +8,13 @@ import (
 
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
-	"github.com/googleapis/enterprise-certificate-proxy/client"
+
 
 	"context"
-	"fmt"
+
 
 	firebase "firebase.google.com/go"
-	"firebase.google.com/go/auth"
+
 
 	"google.golang.org/api/option"
 )
