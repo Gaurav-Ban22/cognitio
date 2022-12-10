@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Another from "./pages/Another";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -13,6 +12,7 @@ import {
 import { auth } from "./firebase";
 import AuthButton from "./components/AuthButton";
 import NoPage from "./pages/NoPage";
+import Sets from "./pages/Sets";
 
 
 function App() {
@@ -42,6 +42,7 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/sets/:id" element={<Sets />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </div>
