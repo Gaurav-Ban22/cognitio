@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Another from "./pages/Another";
+import {
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  User,
+} from "firebase/auth";
+
+import { auth } from "../firebase";
+
 
 function App() {
+  function loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+
+    return signInWithPopup(auth, provider);
+  }
+
+  function logOut() {
+    return auth.signOut();
+  }
+
+  const [currUser, setCurrUser] = useState<User | null>(null);
+
+  onAuthStateChanged(auth, (user) => {
+    setCurrUser(user);
+  });
+
   // the header tag can be extracted into a navbar for better layout
   return (
     <div className="App">
