@@ -70,6 +70,7 @@ func main() {
 	})
 
 	router.GET("/api/sets", func(ctx *gin.Context) {
+		var arr []any;
 		iter := client.Collection("sets").Documents(ctx)
 		for {
 			doc, err := iter.Next()
@@ -77,8 +78,9 @@ func main() {
 				break
 			}
 			test(err)
-			fmt.Println(doc.Data())
+			arr = append(arr, doc.Data())
 		}
+		ctx.IndentedJSON(http.StatusOK, arr);
 
 	})
 
