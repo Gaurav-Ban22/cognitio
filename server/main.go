@@ -39,7 +39,7 @@ func main() {
 
 	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
 
-	router.GET("/sets/:name/", func(ctx *gin.Context) {
+	router.GET("/api/sets/:name/", func(ctx *gin.Context) {
 		name := ctx.Param("name");
 
 		dsnap, err := client.Collection("sets").Doc(name).Get(context.Background())
@@ -51,7 +51,7 @@ func main() {
 
 	})
 
-	router.GET("/sets/:name/:id", func(ctx *gin.Context) {
+	router.GET("/api/sets/:name/:id", func(ctx *gin.Context) {
 		name := ctx.Param("name");
 		id := ctx.Param("id")
 		intID, err := strconv.Atoi(id);
@@ -76,6 +76,9 @@ func main() {
 
 
 	})
+
+
+
 
 	router.Run(":3000")
 }
