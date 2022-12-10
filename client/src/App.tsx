@@ -12,6 +12,7 @@ import {
 
 import { auth } from "./firebase";
 import AuthButton from "./components/AuthButton";
+import NoPage from "./pages/NoPage";
 
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/another" element={<Another />} />
+          <Route path="*" element={<NoPage />} />
         </Routes>
       </div>
     </div>
