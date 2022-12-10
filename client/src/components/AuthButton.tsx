@@ -7,12 +7,11 @@ export default function AuthButton({
     logout,
 }: { currUser: User | null, login: () => {}, logout: () => {} }) {
     return (
-        <>
+        <div style={{ alignItems: "right" }}>
             {currUser ? (
                 <Button
                     variant="contained"
                     color="primary"
-                    style={{ float: "right" }}
                     onClick={logout}
                 >
                     Log Out
@@ -21,12 +20,11 @@ export default function AuthButton({
                 <Button
                     variant="contained"
                     color="primary"
-                    style={{ float: "right" }}
                     onClick={login}
                 >
                     Sign in
                 </Button>
             )}
-        </>
+        </div>
     );
 }

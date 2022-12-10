@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
@@ -36,18 +35,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1><Link to="/">Cognitio</Link></h1>
         <AuthButton currUser={currUser} login={loginWithGoogle} logout={logOut} />
-        <img src={logo} className="App-logo" alt="logo" />
-        <div className="menu">
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/another">Another Page</Link>
-            </li>
-          </ul>
-        </div>
       </header>
       <div className="content">
         <Routes>

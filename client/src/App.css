@@ -4,8 +4,13 @@ ul {
   text-decoration: none;
 }
 
-.App {
-  text-align: center;
+.content {
+  padding: 1%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .App-logo {
@@ -23,10 +28,10 @@ ul {
   background-color: #282c34;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 0.5%;
 }
 
 .App-link {
@@ -37,6 +42,7 @@ ul {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
