@@ -32,6 +32,7 @@ function App() {
     setCurrUser(user);
   });
 
+  useState(async () => { fetch("/api/sets") })
   // the header tag can be extracted into a navbar for better layout
   return (
     <div className="App">
