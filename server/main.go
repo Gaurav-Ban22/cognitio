@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
@@ -63,9 +64,32 @@ func main() {
 		dMap := dsnap.Data()
 		jsonStr, err := json.Marshal(dMap);
 		ctx.IndentedJSON(http.StatusOK, jsonStr);
-		
+
+	})
+
+	router.GET("/sets/:name/:id", func(ctx *gin.Context) {
+		name := ctx.Param("name");
+		id := ctx.Param("id")
+		intID, err := strconv.Atoi(id);
+
+		dsnap, err := client.Collection("sets").Doc(name).Get(context.Background())
+		if (err != nil) {
+			log.Fatalln(err);
+		}
+		dMap := dsnap.Data()
 
 
+
+		for d, v := range dMap {
+			m, err := strconv.Atoi(d);
+			if (m == intID && err != nil) {
+				jsoS, err := json.Marshal(v);
+				if (err != nil) {
+					ctx.IndentedJSON(http.StatusOK, jsoS);
+				}
+				
+			}
+		}
 
 
 	})
