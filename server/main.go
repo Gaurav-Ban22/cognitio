@@ -2,10 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
-	"fmt"
 
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
@@ -70,33 +70,25 @@ func main() {
 				}
 			}
 		})
+
+		router.GET("/sets", func(ctx *gin.Context) {
+			iter := client.Collection("sets").Documents(ctx)
+			for {
+				doc, err := iter.Next()
+				if err == iterator.Done {
+					break
+				}
+				test(err)
+				fmt.Println(doc.Data())
+			}
+
+		})
 	}
 
 	//router.POST("/api/sets/:name", func(ctx *gin.Context) {
 	//name := ctx.Param("name");
 
 	//});
-
-
-	router.GET("/api/sets", func(ctx *gin.Context) {
-		iter := client.Collection("sets").Documents(ctx);
-		for {
-			doc, err := iter.Next();
-			if err == iterator.Done {
-				break
-			} 
-			test(err);
-			fmt.Println(doc.Data());
-		}
-
-		
-	});
-
-
-	
-
-
-
 
 	router.Run(":3000")
 }
