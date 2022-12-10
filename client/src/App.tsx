@@ -11,7 +11,8 @@ import {
   User,
 } from "firebase/auth";
 
-import { auth } from "../firebase";
+import { auth } from "./firebase";
+import AuthButton from "./components/AuthButton";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <AuthButton currUser={currUser} login={loginWithGoogle} logout={logOut} />
         <img src={logo} className="App-logo" alt="logo" />
         <div className="menu">
           <ul>
