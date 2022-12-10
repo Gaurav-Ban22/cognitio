@@ -5,17 +5,16 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"fmt"
 
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 
-
 	"context"
-
 
 	firebase "firebase.google.com/go"
 
-
+	"google.golang.org/api/iterator"
 	"google.golang.org/api/option"
 )
 
@@ -81,6 +80,21 @@ func main() {
 		//name := ctx.Param("name");
 
 	//});
+
+
+	router.GET("/api/sets", func(ctx *gin.Context) {
+		iter := client.Collection("sets").Documents(ctx);
+		for {
+			doc, err := iter.Next();
+			if err == iterator.Done {
+				break
+			} 
+			test(err);
+			fmt.Println(doc.Data());
+		}
+
+		
+	});
 
 
 	
