@@ -37,53 +37,50 @@ func main() {
 
 	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
 
-	router.Group("/api")
-	{
-		router.GET("/sets/:name/", func(ctx *gin.Context) {
-			name := ctx.Param("name")
+	router.GET("/api/sets/:name/", func(ctx *gin.Context) {
+		name := ctx.Param("name")
 
-			dsnap, err := client.Collection("sets").Doc(name).Get(context.Background())
-			test(err)
-			dMap := dsnap.Data()
-			jsonStr, err := json.Marshal(dMap)
-			test(err)
-			ctx.IndentedJSON(http.StatusOK, jsonStr)
-		})
+		dsnap, err := client.Collection("sets").Doc(name).Get(context.Background())
+		test(err)
+		dMap := dsnap.Data()
+		jsonStr, err := json.Marshal(dMap)
+		test(err)
+		ctx.IndentedJSON(http.StatusOK, jsonStr)
+	})
 
-		router.GET("/sets/:name/:id", func(ctx *gin.Context) {
-			name := ctx.Param("name")
-			id := ctx.Param("id")
-			intID, err := strconv.Atoi(id)
-			test(err)
+	router.GET("/api/sets/:name/:id", func(ctx *gin.Context) {
+		name := ctx.Param("name")
+		id := ctx.Param("id")
+		intID, err := strconv.Atoi(id)
+		test(err)
 
-			dsnap, err := client.Collection("sets").Doc(name).Get(context.Background())
-			test(err)
-			dMap := dsnap.Data()
+		dsnap, err := client.Collection("sets").Doc(name).Get(context.Background())
+		test(err)
+		dMap := dsnap.Data()
 
-			for d, v := range dMap {
-				m, err := strconv.Atoi(d)
-				if m == intID && err != nil {
-					jsoS, err := json.Marshal(v)
-					if err != nil {
-						ctx.IndentedJSON(http.StatusOK, jsoS)
-					}
+		for d, v := range dMap {
+			m, err := strconv.Atoi(d)
+			if m == intID && err != nil {
+				jsoS, err := json.Marshal(v)
+				if err != nil {
+					ctx.IndentedJSON(http.StatusOK, jsoS)
 				}
 			}
-		})
+		}
+	})
 
-		router.GET("/sets", func(ctx *gin.Context) {
-			iter := client.Collection("sets").Documents(ctx)
-			for {
-				doc, err := iter.Next()
-				if err == iterator.Done {
-					break
-				}
-				test(err)
-				fmt.Println(doc.Data())
+	router.GET("/api/sets", func(ctx *gin.Context) {
+		iter := client.Collection("sets").Documents(ctx)
+		for {
+			doc, err := iter.Next()
+			if err == iterator.Done {
+				break
 			}
+			test(err)
+			fmt.Println(doc.Data())
+		}
 
-		})
-	}
+	})
 
 	//router.POST("/api/sets/:name", func(ctx *gin.Context) {
 	//name := ctx.Param("name");
