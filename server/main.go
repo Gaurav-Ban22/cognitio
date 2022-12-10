@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
@@ -34,7 +35,7 @@ func getSet(c *gin.Context) {
 
 func addSet(c *gin.Context) {
 
-	
+
 }
 
 func main() {
@@ -52,14 +53,22 @@ func main() {
 
 	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
 
-	api := router.Group("/api")
-	{
-		api.GET("/", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "API is up!",
-			})
-		})
-	}
+	router.GET("/sets/:name/", func(ctx *gin.Context) {
+		name := ctx.Param("name");
+
+		dsnap, err := client.Collection("sets").Doc(name).Get(context.Background())
+		if (err != nil) {
+			log.Fatalln(err);
+		}
+		dMap := dsnap.Data()
+		jsonStr, err := json.Marshal(dMap);
+		ctx.IndentedJSON(http.StatusOK, jsonStr);
+		
+
+
+
+
+	})
 
 	router.Run(":3000")
 }
