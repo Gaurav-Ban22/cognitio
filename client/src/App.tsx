@@ -37,9 +37,13 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       fetch("/api/sets").then(res => res.json()).then((res) => {
-        console.log(res)
+        const temp = new Map()
 
-        setSets(new Map(Object.entries(res)))
+        for (const [key, value] of Object.entries(res)) {
+          console.log(key, value)
+          temp.set(key, value);
+        }
+        setSets(temp)
       })
     }
     fetchData()
@@ -54,12 +58,10 @@ function App() {
       </header>
       <div className="content">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/sets/:id" element={<Sets />} />
+          <Route path="/" element={<Home sets={sets} />} />
+          <Route path="/sets/:id/" element={<Sets />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
-        {sets.size}
-        {Object.entries(sets).map(set => <Link to={"/sets/" + set[0]}>asdf</Link>)}
       </div>
     </div>
   );
