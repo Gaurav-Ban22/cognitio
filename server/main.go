@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -34,6 +36,16 @@ func main() {
 	router := gin.Default()
 
 	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
+
+	router.POST("/api/sets", func(ctx *gin.Context) {
+		jsoData, err := ioutil.ReadAll(ctx.Request.Body);
+		test(err);
+		var amogo any;
+		err = json.Unmarshal(jsoData, amogo)
+		test(err);
+		client.Collection("sets").Add(ctx, amogo);
+
+	})
 
 	router.GET("/api/sets", func(ctx *gin.Context) {
 		var arr = make(map[string]interface{}, 0)
