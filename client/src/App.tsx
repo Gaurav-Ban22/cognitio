@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
@@ -13,7 +13,7 @@ import { auth } from "./firebase";
 import AuthButton from "./components/AuthButton";
 import NoPage from "./pages/NoPage";
 import Sets from "./pages/Sets";
-import { Card, SetData } from "./types";
+import { SetData } from "./types";
 
 
 function App() {
@@ -52,8 +52,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1><Link to="/">Cognitio</Link></h1>
-        <AuthButton currUser={currUser} login={loginWithGoogle} logout={logOut} />
+        <div className="left-half">
+          <h1><Link to="/">Cognitio</Link></h1>
+        </div>
+        <div className="right-half">
+          <AuthButton currUser={currUser} login={loginWithGoogle} logout={logOut} />
+        </div>
       </header>
       <div className="content">
         <Routes>

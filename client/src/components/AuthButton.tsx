@@ -7,7 +7,7 @@ export default function AuthButton({
     logout,
 }: { currUser: User | null, login: () => {}, logout: () => {} }) {
     return (
-        <div style={{ alignItems: "right" }}>
+        <div style={{ alignItems: "right", overflow: "hidden" }}>
             {currUser ? (
                 <Button
                     variant="contained"
@@ -22,7 +22,7 @@ export default function AuthButton({
                     color="primary"
                     onClick={login}
                 >
-                    Sign in
+                    Sign in with Google
                 </Button>
             )}
         </div>

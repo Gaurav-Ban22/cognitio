@@ -26,9 +26,8 @@ a {
 
 .App-header {
   background-color: mediumaquamarine;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  grid-template: 50% 50%;
   font-size: calc(10px + 2vmin);
   color: white;
   padding: 0.5%;
@@ -46,4 +45,8 @@ a {
   to {
     transform: rotate(360deg);
   }
+}
+
+.right-half {
+  margin-left: auto;
 }
