@@ -24,8 +24,8 @@ function Editor() {
         <div style={{ width: "100%" }}>
             <div style={{ marginLeft: "auto", marginRight: "auto" }}>
                 <div style={{ margin: "10px" }}>
-                    Title
-                    <TextField title="Set Title" onChange={(e) => setName(e.target.value)} value={name} />
+                    <h3>Set Title</h3>
+                    <TextField onChange={(e) => setName(e.target.value)} value={name} />
                     <div className="front">
                         <h3>Front Side</h3>
                         <TextField style={{ width: "400px" }} variant="filled" onChange={(e) => {
@@ -64,7 +64,7 @@ function Editor() {
 
                 <div style={{ position: "absolute", bottom: "0px", display: "flex", flexDirection: "row", margin: "0", width: "100%" }}>
                     <Button variant="contained" style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute", left: "0px", height: "100%" }} onClick={left}>{"<"}</Button>
-                    <div>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
                         {cards.map(([front]) => <div style={{ border: "1px solid white", backgroundColor: "#bbb", padding: "2%", textAlign: "center", width: "200px", height: "150px", marginRight: "10px" }}>{front}</div>)}
                     </div>
                     <Button variant="contained" style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute", right: "0px", height: "100%" }} onClick={right}>{">"}</Button>

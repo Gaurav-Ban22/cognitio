@@ -37,7 +37,7 @@ function Sets() {
     return (
         <div className="card-container" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <div>
-                {data ? <h1 >{data.title}</h1> : <></>}
+                {data ? <h1>{data.title}</h1> : <></>}
             </div>
             <div className="display-index">
                 {index + 1} of {length}
