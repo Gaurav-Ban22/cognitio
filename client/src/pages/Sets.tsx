@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import FlashCard from "../components/Flashcard"
 import { SetData } from "../types"
+import "./Sets.css"
 
 function Sets() {
     const { id } = useParams()
@@ -34,7 +35,13 @@ function Sets() {
     }
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div className="card-container" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div>
+                {data ? <h1 >{data.title}</h1> : <></>}
+            </div>
+            <div className="display-index">
+                {index + 1} of {length}
+            </div>
             <div className="whole-card">
                 <Button variant="contained" onClick={left}>{"<"}</Button>
                 {data ? <FlashCard {...data.data[index]} /> : <>Set not found</>}

@@ -1,0 +1,15 @@
+.whole-card {
+    width: 500px;
+    height: 300px;
+    display: grid;
+    grid-template-columns: 50px 400px 50px;
+}
+
+.display-index {
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    flex-flow: column;
+}

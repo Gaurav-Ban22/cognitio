@@ -1,5 +1,6 @@
 export interface SetData {
     data: Card[]
+    title: string
 }
 
 export interface Card {
