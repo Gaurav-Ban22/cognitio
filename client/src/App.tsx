@@ -40,7 +40,6 @@ function App() {
         const temp = new Map()
 
         for (const [key, value] of Object.entries(res)) {
-          console.log(key, value)
           temp.set(key, value);
         }
         setSets(temp)

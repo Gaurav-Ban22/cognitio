@@ -1,4 +1,4 @@
-import { Button, Card as CardMUI } from "@material-ui/core"
+import { Button } from "@material-ui/core"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import FlashCard from "../components/Flashcard"
@@ -34,11 +34,14 @@ function Sets() {
     }
 
     return (
-        <div>
-            <Button onClick={left}>{"<"}</Button>
-            {data ? <FlashCard {...data.data[index]} /> : <>Set not found</>}
-            <Button onClick={right}>{">"}</Button>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div className="whole-card">
+                <Button variant="contained" onClick={left}>{"<"}</Button>
+                {data ? <FlashCard {...data.data[index]} /> : <>Set not found</>}
+                <Button variant="contained" onClick={right}>{">"}</Button>
+            </div>
         </div>
+
     )
 }
 
