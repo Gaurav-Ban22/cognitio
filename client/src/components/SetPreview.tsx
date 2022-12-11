@@ -19,7 +19,6 @@ function SetPreview({ id }: { id: string }) {
                 <h3>{data.title}</h3>
                 {data.data.length ? <div style={{ border: "1px solid white", backgroundColor: "#bbb", padding: "2%", textAlign: "center", width: "200px", height: "150px", marginRight: "10px" }}>{data.data[0].front}</div> : <></>}
             </div>
-
         )
     }
 

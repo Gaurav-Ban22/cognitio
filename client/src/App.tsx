@@ -14,6 +14,8 @@ import AuthButton from "./components/AuthButton";
 import NoPage from "./pages/NoPage";
 import Sets from "./pages/Sets";
 import { SetData } from "./types";
+import Editor from "./pages/Editor";
+import { Button } from "@material-ui/core";
 
 
 function App() {
@@ -56,6 +58,7 @@ function App() {
           <h1><Link to="/">Cognitio</Link></h1>
         </div>
         <div className="right-half">
+          <Button variant="contained"><Link to="/editor">Editor</Link></Button>
           <AuthButton currUser={currUser} login={loginWithGoogle} logout={logOut} />
         </div>
       </header>
@@ -63,6 +66,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home sets={sets} />} />
           <Route path="/sets/:id/" element={<Sets />} />
+          <Route path="/editor" element={<Editor />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </div>
