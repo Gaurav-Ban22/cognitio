@@ -39,13 +39,32 @@ func main() {
 
 	router.GET("/api/sets/:name/", func(ctx *gin.Context) {
 		name := ctx.Param("name")
+		log.Println("bcsharp")
 
-		dsnap, err := client.Collection("sets").Doc(name).Get(context.Background())
-		test(err)
-		dMap := dsnap.Data()
-		jsonStr, err := json.Marshal(dMap)
-		test(err)
-		ctx.IndentedJSON(http.StatusOK, jsonStr)
+		// dsnap, err := client.Collection("sets").Doc(name).Get(context.Background())
+		// test(err)
+		// dMap := dsnap.Data()
+		// jsonStr, err := json.Marshal(dMap)
+		// test(err)
+		// ctx.IndentedJSON(http.StatusOK, jsonStr)
+
+		var arr = make(map[string]interface{}, 0)
+		iter := client.Collection("sets").Documents(ctx)
+		for {
+			doc, err := iter.Next()
+			if err == iterator.Done {
+				break
+			}
+			test(err)
+			amog := doc.Ref.ID
+			if amog == name {
+				arr[amog] = doc.Data()
+				break
+			}
+
+				
+		}
+		ctx.IndentedJSON(http.StatusOK, arr)
 	})
 
 	router.GET("/api/sets/:name/:id", func(ctx *gin.Context) {
