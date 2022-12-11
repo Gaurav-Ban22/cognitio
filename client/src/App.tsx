@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
@@ -13,6 +13,7 @@ import { auth } from "./firebase";
 import AuthButton from "./components/AuthButton";
 import NoPage from "./pages/NoPage";
 import Sets from "./pages/Sets";
+import { Card, SetData } from "./types";
 
 
 function App() {
@@ -27,13 +28,24 @@ function App() {
   }
 
   const [currUser, setCurrUser] = useState<User | null>(null);
+  const [sets, setSets] = useState<Map<string, SetData>>(new Map())
 
   onAuthStateChanged(auth, (user) => {
     setCurrUser(user);
   });
 
-  useState(async () => { fetch("/api/sets") })
-  // the header tag can be extracted into a navbar for better layout
+  useEffect(() => {
+    async function fetchData() {
+      fetch("/api/sets").then(res => res.json()).then((res) => {
+        console.log(res)
+
+        setSets(new Map(Object.entries(res)))
+      })
+    }
+    fetchData()
+  }, []
+  )
+
   return (
     <div className="App">
       <header className="App-header">
@@ -46,6 +58,8 @@ function App() {
           <Route path="/sets/:id" element={<Sets />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
+        {sets.size}
+        {Object.entries(sets).map(set => <Link to={"/sets/" + set[0]}>asdf</Link>)}
       </div>
     </div>
   );
