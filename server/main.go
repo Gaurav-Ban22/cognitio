@@ -23,7 +23,8 @@ func test(er error) {
 		log.Println(er)
 	}
 }
-//done
+
+// done
 func main() {
 
 	opt := option.WithCredentialsFile("./ServiceAccountKey.json")
@@ -39,7 +40,6 @@ func main() {
 
 	router.GET("/api/sets/:name/", func(ctx *gin.Context) {
 		name := ctx.Param("name")
-		log.Println("bcsharp")
 
 		// dsnap, err := client.Collection("sets").Doc(name).Get(context.Background())
 		// test(err)
@@ -62,7 +62,6 @@ func main() {
 				break
 			}
 
-				
 		}
 		ctx.IndentedJSON(http.StatusOK, arr)
 	})
